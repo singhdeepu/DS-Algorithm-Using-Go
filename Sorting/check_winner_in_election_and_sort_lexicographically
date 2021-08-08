@@ -1,0 +1,50 @@
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func findWinners(arr []string) {
+	winnerMap := make(map[string]int)
+
+	for i := 0; i < len(arr)-1; i++ {
+
+		_, exists := winnerMap[arr[i]]
+		if exists {
+			winnerMap[arr[i]] += 1
+
+		} else {
+			winnerMap[arr[i]] = 1
+
+		}
+
+	}
+	
+	fmt.Println(winnerMap)
+	intMaxvalueInMap := 0
+	var winner string = ""
+	for k, v := range winnerMap {
+		if v > intMaxvalueInMap {
+
+			intMaxvalueInMap = v
+			winner = k
+		} else if v == intMaxvalueInMap && strings.Compare(winner, k) > 0 {
+
+			winner = k
+
+		}
+
+	}
+	fmt.Println(winner)
+}
+func main() {
+	fmt.Println("Hello, playground")
+	slice := []string{"john", "johnny", "jackie",
+		"johnny", "john", "jackie",
+		"jamie", "jamie", "john",
+		"johnny", "jamie", "johnny",
+		"john"}
+
+	findWinners(slice)
+}
